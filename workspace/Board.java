@@ -32,8 +32,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	private static final String RESOURCES_WQUEEN_PNG = "wqueen.png";
 	private static final String RESOURCES_WPAWN_PNG = "wpawn.png";
 	private static final String RESOURCES_BPAWN_PNG = "bpawn.png";
-    private static final String RESOURCES_WANTIPAWN_PNG = "wantipawn.png";
-	private static final String RESOURCES_BANTIPAWN_PNG = "bantipawn.png";
+    private static final String RESOURCES_WPRTLR_PNG = "wprtlr.png";
+	private static final String RESOURCES_BPRTLR_PNG = "bprtlr.png";
 	
 	// Logical and graphical representations of board
 	private final Square[][] board;
@@ -112,8 +112,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     	
         for (int i = 0; i < 8; i++)
         {
-            board[1][i].put(new Piece(true, RESOURCES_WANTIPAWN_PNG));
-            board[6][i].put(new Piece(true, RESOURCES_BANTIPAWN_PNG));
+            board[1][i].put(new Piece(true, RESOURCES_WPAWN_PNG ));
+            board[6][i].put(new Piece(true, RESOURCES_BPAWN_PNG ));
         }
 
     }
