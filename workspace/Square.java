@@ -85,9 +85,9 @@ public class Square extends JComponent {
         super.paintComponent(g);
         
         if (this.color) {
-            g.setColor(new Color(205,230,255));
+            g.setColor(new Color(221,192,127));
         } else {
-            g.setColor(new Color(50,150,150));
+            g.setColor(new Color(101,67,33));
         }
         
         g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
