@@ -78,6 +78,8 @@ public class Piece {
     //     return legalMoves;
     // }
 
+    //Debug Legal Moves
+    
     public ArrayList<Square> getLegalMoves(Board b, Square start) {
         ArrayList<Square> legalMoves = new ArrayList<>();
         Square[][] board = b.getSquareArray(); // Fetch the board squares
@@ -105,6 +107,9 @@ public class Piece {
     
         return legalMoves;
     }
+    
+
+   
     
   
     private boolean isBehindEnemy(Square start, Square enemySquare, int eRow, int eCol) {
