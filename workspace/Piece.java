@@ -58,26 +58,54 @@ public class Piece {
     }
 
     
-    public ArrayList<Square> getLegalMoves(Board b, Square start) {
-        ArrayList<Square> legalMoves = new ArrayList<>();
-        Square[][] board = b.getSquareArray(); 
+    // public ArrayList<Square> getLegalMoves(Board b, Square start) {
+    //     ArrayList<Square> legalMoves = new ArrayList<>();
+    //     Square[][] board = b.getSquareArray(); 
 
-        int row = start.getRow();
-        int col = start.getCol();
+    //     int row = start.getRow();
+    //     int col = start.getCol();
 
    
+    //     for (int r = 0; r < 8; r++) {
+    //         for (int c = 0; c < 8; c++) {
+    //             if (board[r][c].isOccupied() && board[r][c].getOccupyingPiece().getColor() != this.color) {
+    //                 if (isBehindEnemy(start, board[r][c], r, c)) {
+    //                     legalMoves.add(board[r][c]);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return legalMoves;
+    // }
+
+    public ArrayList<Square> getLegalMoves(Board b, Square start) {
+        ArrayList<Square> legalMoves = new ArrayList<>();
+        Square[][] board = b.getSquareArray(); // Fetch the board squares
+    
+        int row = start.getRow();
+        int col = start.getCol();
+    
+        // Check each square on the board for enemy pieces
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
                 if (board[r][c].isOccupied() && board[r][c].getOccupyingPiece().getColor() != this.color) {
                     if (isBehindEnemy(start, board[r][c], r, c)) {
                         legalMoves.add(board[r][c]);
+                        System.out.println("Legal move found at: " + r + ", " + c);
                     }
                 }
             }
         }
+    
+        if (legalMoves.isEmpty()) {
+            System.out.println("No legal moves available.");
+        } else {
+            System.out.println("Legal moves: " + legalMoves.size());
+        }
+    
         return legalMoves;
     }
-
+    
   
     private boolean isBehindEnemy(Square start, Square enemySquare, int eRow, int eCol) {
         int startRow = start.getRow();
