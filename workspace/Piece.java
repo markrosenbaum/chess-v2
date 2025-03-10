@@ -35,14 +35,14 @@ public class Piece {
         g.drawImage(this.img, x, y, null);
     }
 
-    // Return a list of every square that is "controlled" by this piece.
+  
     public ArrayList<Square> getControlledSquares(Square[][] board, Square start) {
         ArrayList<Square> controlledSquares = new ArrayList<>();
 
         int row = start.getRow();
         int col = start.getCol();
 
-        // Check for a piece directly adjacent (1 square in any direction)
+
         for (int r = row - 1; r <= row + 1; r++) {
             for (int c = col - 1; c <= col + 1; c++) {
                 if (r == row && c == col) continue; 
@@ -65,7 +65,7 @@ public class Piece {
         int row = start.getRow();
         int col = start.getCol();
 
-        // Moving backwards to any square behind an enemy piece
+   
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
                 if (board[r][c].isOccupied() && board[r][c].getOccupyingPiece().getColor() != this.color) {
@@ -83,12 +83,12 @@ public class Piece {
         int startRow = start.getRow();
         int startCol = start.getCol();
         
-        // For white pieces
+
         if (this.color) {
-            // Move up the board for white (lower row numbers)
+
             return (eRow > startRow) && (eCol == startCol);
-        } else {  // For black pieces
-            // Move down the board for black (higher row numbers)
+        } else {  
+
             return (eRow < startRow) && (eCol == startCol);
         }
     }
