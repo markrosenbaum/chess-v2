@@ -35,13 +35,11 @@ public class Piece {
         g.drawImage(this.img, x, y, null);
     }
 
-  
     public ArrayList<Square> getControlledSquares(Square[][] board, Square start) {
         ArrayList<Square> controlledSquares = new ArrayList<>();
 
         int row = start.getRow();
         int col = start.getCol();
-
 
         for (int r = row - 1; r <= row + 1; r++) {
             for (int c = col - 1; c <= col + 1; c++) {
@@ -57,72 +55,44 @@ public class Piece {
         return controlledSquares;
     }
 
-    
-    // public ArrayList<Square> getLegalMoves(Board b, Square start) {
-    //     ArrayList<Square> legalMoves = new ArrayList<>();
-    //     Square[][] board = b.getSquareArray(); 
-
-    //     int row = start.getRow();
-    //     int col = start.getCol();
-
-   
-    //     for (int r = 0; r < 8; r++) {
-    //         for (int c = 0; c < 8; c++) {
-    //             if (board[r][c].isOccupied() && board[r][c].getOccupyingPiece().getColor() != this.color) {
-    //                 if (isBehindEnemy(start, board[r][c], r, c)) {
-    //                     legalMoves.add(board[r][c]);
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return legalMoves;
-    // }
-
-    //Debug Legal Moves
-    
     public ArrayList<Square> getLegalMoves(Board b, Square start) {
         ArrayList<Square> legalMoves = new ArrayList<>();
-        Square[][] board = b.getSquareArray(); // Fetch the board squares
-    
+        Square[][] board = b.getSquareArray(); 
+
         int row = start.getRow();
         int col = start.getCol();
-    
-        // Check each square on the board for enemy pieces
+
+        System.out.println("Checking legal moves for piece at: " + row + ", " + col);
+
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
-                if (board[r][c].isOccupied() && board[r][c].getOccupyingPiece().getColor() != this.color) {
-                    if (isBehindEnemy(start, board[r][c], r, c)) {
-                        legalMoves.add(board[r][c]);
-                        System.out.println("Legal move found at: " + r + ", " + c);
+                if (board[r][c].isOccupied()) {
+                    Piece occupyingPiece = board[r][c].getOccupyingPiece();
+                    System.out.println("Piece found at (" + r + ", " + c + "): " + 
+                        (occupyingPiece.getColor() ? "White" : "Black"));
+
+                    if (occupyingPiece.getColor() != this.color) {
+                        System.out.println("Enemy piece detected at: " + r + ", " + c);
+
+                        int newRow = this.color ? r + 1 : r - 1;
+                        if (newRow >= 0 && newRow < 8) {
+                            Square destination = board[newRow][c];
+                            if (!destination.isOccupied()) { 
+                                legalMoves.add(destination);
+                                System.out.println("Teleport move added to: " + newRow + ", " + c);
+                            }
+                        }
                     }
                 }
             }
         }
-    
+
         if (legalMoves.isEmpty()) {
             System.out.println("No legal moves available.");
         } else {
-            System.out.println("Legal moves: " + legalMoves.size());
+            System.out.println("Legal moves found: " + legalMoves.size());
         }
-    
+
         return legalMoves;
-    }
-    
-
-   
-    
-  
-    private boolean isBehindEnemy(Square start, Square enemySquare, int eRow, int eCol) {
-        int startRow = start.getRow();
-        int startCol = start.getCol();
-        
-
-        if (this.color) {
-
-            return (eRow > startRow) && (eCol == startCol);
-        } else {  
-
-            return (eRow < startRow) && (eCol == startCol);
-        }
     }
 }
